@@ -1,15 +1,10 @@
-const readline = require('readline');
+const readline = require('readline-sync');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
-rl.question('Enter a string to Count a Character: ', (inputString) => {
-    const totalCharacter = countChar(inputString);
+const str1 = readline.question('Enter a string to Count a Character: ');
+    const totalCharacter = countChar(str1);
     console.log('Total Character in a String:', totalCharacter);
-    rl.close();
-});
+
 
 function countChar(str) {
         let count = 0;
@@ -18,7 +13,6 @@ function countChar(str) {
                 count ++;
              }
         }
-        console.log(count);
         return count;
     }
 
