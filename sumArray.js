@@ -1,28 +1,25 @@
-const readline = require('readline');
+const readline = require('readline-sync');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+let str1 = readline.question('Enter elements of the array (comma-separated): ');
 
-function sumArrayElements(arr) {
-    return arr.reduce((sum, num) => sum + num, 0);
+const elements = input.split(',').map(Number);
+
+if (elements.every(Number.isFinite)) {
+    const result = sumArrayElements(elements);
+
+    console.log('Array Elements:', elements);
+    console.log('Sum of Array Elements:', result);
+} else {
+    console.log('Invalid input. Please enter valid numbers.');
 }
 
-rl.question('Enter elements of the array (comma-separated): ', (input) => {
-    // Convert the input string to an array of numbers
-    const elements = input.split(',').map(Number);
-
-    // Check if the array contains valid numbers
-    if (elements.every(Number.isFinite)) {
-        // Calculate the sum of array elements
-        const result = sumArrayElements(elements);
-
-        console.log('Array Elements:', elements);
-        console.log('Sum of Array Elements:', result);
-    } else {
-        console.log('Invalid input. Please enter valid numbers.');
+function sumArrayElements(arr) {
+    let sum = 0;
+    for(let i = 0;i<arr.length;i++){
+        sum+=arr[i];
     }
+    return sum;
+}
 
-    rl.close();
-});
+
+
