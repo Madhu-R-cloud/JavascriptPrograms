@@ -1,16 +1,14 @@
-const readline = require('readline');
+const readline = require('readline-sync');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+let str1 = readline.question("Enter string str1 :");
 
-rl.question('Enter a string: ', (inputString) => {
-    const reversedString = reverseString(inputString);
-    console.log('Reversed String:', reversedString);
-    rl.close();
-});
+    console.log('Reversed String:', reverseString(str1));
 
 function reverseString(str) {
-    return str.split('').reverse().join('');
+    let reversedString = '';
+
+    for(let i = str.length - 1; i >= 0;i--){
+        reversedString += str[i];
+    }
+    return reversedString;
 }
