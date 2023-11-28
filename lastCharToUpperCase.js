@@ -1,22 +1,14 @@
-const { log } = require('console');
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Enter string: ', (inputString) => {
-    if(inputString.length == 0){
+// const { log } = require('console');
+const readline = require('readline-sync');
+const str1 = readline.question('Enter string: ');
+    if(str1.length == 0){
         console.log("Enter 1 or More characters");
-        rl.close();
     }else{
-        const ChangedLastChar  = changeLastCharToUpperCase(inputString);
+        const ChangedLastChar  = changeLastCharToUpperCase(str1);
     console.log('Changed last Character to Upper Case in Given  String:', ChangedLastChar);
-    rl.close();
     }
     
-});
+
 
 function changeLastCharToUpperCase(inputString) {
     var modifiedString;
@@ -29,11 +21,9 @@ function changeLastCharToUpperCase(inputString) {
             modifiedString = charArray[charArray.length - 1].toUpperCase();
         }
         
-
         return modifiedString;
     } else {
 
         return inputString;
     }
 }
-
