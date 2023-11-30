@@ -24,28 +24,40 @@ let bookStore = [
 
 let cart = [];
 
-let r1 = readline.question("Enter the 1, for Show the books 2, for Add Book to Cart 3, Show the cart : ");
+let r1 = readline.question("Enter Any number :\n1.Display Book.\n2.Add Book to Cart\n3.Show the cart.\n4.Exit\n");
 
 if(r1 == 1){
     showAvailableBooks();  
-    r1 = readline.question("Enter the 1, for Show the books 2, for Add Book to Cart 3, Show the cart : ");   
+    r1 = readline.question("Enter Any number :\n1.Display Book.\n2.Add Book to Cart\n3.Show the cart.\n4.Exit\n");   
 }
 if(r1==2){
     let bookIndex = readline.question("Enter Book Index : ");
     let Quantity = readline.question("Enter Quantity of Book : ")
     addBookToCart(bookIndex,Quantity);
+    r1 = readline.question("Enter Any number :\n1.Display Book.\n2.Add Book to Cart\n3.Show the cart.\n4.Exit\n");   
+
 }
 if(r1==3){
-    showCart();
+    let res = showCart();
+    console.log(`Total Cart Value: ${res}`);
+    r1 = readline.question("Enter Any number :\n1.Display Book.\n2.Add Book to Cart\n3.Show the cart.\n4.Exit\n");   
 }
+if(r1==4){
+    console.log("Thank You for visiting the portal\n");
+}
+
 function showAvailableBooks() {
-        console.log("Available Books:");
-        for (let i = 0; i < bookStore.length; i++) {
-            console.log(`${i + 1}. Name: ${bookStore[i].name}, Price: $${bookStore[i].price}, Quantity: ${bookStore[i].quantity}`);
-        }
-          }
-    
-//Add book to cart
+    console.log("Available Books:");
+    console.log("+----+----------------------+-------+----------+");
+    console.log("| ID |        Name          | Price | Quantity |");
+    console.log("+----+----------------------+-------+----------+");
+
+    for (let i = 0; i < bookStore.length; i++) {
+        console.log(`| ${i + 1}  | ${padString(bookStore[i].name, 20)} | $${padString(bookStore[i].price.toFixed(2), 5)} | ${padString(bookStore[i].quantity.toString(), 8)}|`);
+    }
+
+    console.log("+----+----------------------+-------+----------+");
+}
 
 function addBookToCart(bookIndex, quantity) {
     const selectedBook = bookStore[bookIndex - 1];
@@ -63,27 +75,39 @@ function addBookToCart(bookIndex, quantity) {
 
         console.log(`${selectedBook.name} has been added to the cart.\n`);
         showCart()
-        console.log("After Adding Books to cart, The available Books in List are : ",selectedBook)
+           
+        if(selectedBook.quantity == 0){
+            selectedBook.status = 'unavailable';
+        }
+        console.log("After Adding Books to cart, The available Books in List are : ");
+        console.log(selectedBook);
+
     } else {
         console.log("Available Quantity of Book",selectedBook.name,"Invalid selection or insufficient quantity. Please try again.");
+        console.log("These are the available books with this quantity",showAvailableBooks());
     }
 }
-
 function showCart() {
-    let totalCartValue = 0;
+let totalCartValue = 0;
     if(!cart.length == 0){
         console.log("Your Books in Cart");
     for (const book of cart) {
         console.log(`Name: ${book.name}, Price: $${book.price}, Quantity: ${book.quantity}, Total Price: $${book.totalPrice}`);
         totalCartValue += book.totalPrice;
     }
-    console.log(`Total Cart Value: $${totalCartValue}`);
+        return totalCartValue;
     }  
     else{
-        console.log("Your Cart is Empty")
+        console.log("Your Cart is Empty");
+        exit();
     }
-    
-  
-   
-    // showAvailableBooks();
 }
+
+// Function to pad a string with spaces
+function padString(str, length) {
+    return str.padEnd(length);
+}
+
+    
+//Add book to cart
+
