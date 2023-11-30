@@ -107,7 +107,3 @@ let totalCartValue = 0;
 function padString(str, length) {
     return str.padEnd(length);
 }
-
-    
-//Add book to cart
-
