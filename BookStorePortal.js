@@ -1,5 +1,4 @@
 const readline = require("readline-sync");
-
 // Task 1
 let bookStore = [
     {
